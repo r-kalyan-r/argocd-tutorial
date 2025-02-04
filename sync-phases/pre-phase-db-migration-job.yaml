@@ -10,11 +10,11 @@ spec:
       containers:
       - name: migrate
         image: postgres:latest
-      restartPolicy: Never
-      env:
+        env:  # env should be inside the container
         - name: POSTGRES_PASSWORD
           value: "test123"
         - name: POSTGRES_USER
           value: "test123"
         - name: POSTGRES_DB
           value: "test"
+      restartPolicy: Never
