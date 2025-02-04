@@ -11,3 +11,6 @@ spec:
       - name: migrate
         image: postgres:latest
       restartPolicy: Never
+      env:
+        - name: POSTGRES_PASSWORD
+          value: "test123"
