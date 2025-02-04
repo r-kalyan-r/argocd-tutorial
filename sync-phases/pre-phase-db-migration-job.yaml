@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: db-migration
+  name: pre-db-migration
   annotations:
     argocd.argoproj.io/hook: PreSync
 spec:
@@ -14,3 +14,7 @@ spec:
       env:
         - name: POSTGRES_PASSWORD
           value: "test123"
+        - name: POSTGRES_USER
+          value: "test123"
+        - name: POSTGRES_DB
+          value: "test"
