@@ -10,6 +10,7 @@ spec:
       containers:
       - name: migrate
         image: postgres:latest
+        command: ["sh", "-c", "echo 'Running DB migrations...' && exit 0"]
         env:  # env should be inside the container
         - name: POSTGRES_PASSWORD
           value: "test123"
