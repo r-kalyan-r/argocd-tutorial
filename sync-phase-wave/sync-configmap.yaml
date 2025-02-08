@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: application
+  annotations:
+    argocd.argoproj.io/sync-phase: Sync
+    argocd.argoproj.io/sync-wave: "0"
+data:
+  app.property: "value"
+  config.property: "value"

@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: post-deploy-check
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  template:
+    spec:
+      containers:
+      - name: check
+        image: nginx:latest
+        command: ["sh", "-c", "echo 'App is healthy, ' && exit 0"]
+      restartPolicy: Never
