@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pre-db-init
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/sync-wave: "0" # Sync wave for namespace creation
+spec:
+  template:
+    spec:
+      containers:
+      - name: migrate
+        image: postgres:latest
+        command: ["sh", "-c", "echo 'Running DB migrations...' && exit 0"]
+        env:  # env should be inside the container
+        - name: POSTGRES_PASSWORD
+          value: "test123"
+        - name: POSTGRES_USER
+          value: "test123"
+        - name: POSTGRES_DB
+          value: "test"
+      restartPolicy: Never
