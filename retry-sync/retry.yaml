@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: retry-sync
+  namespace: argocd  # Application namespace
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:r-kalyan-r/argocd-tutorial.git
+    path: retry-sync  # Path inside repo
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc  # Default cluster
+    namespace: application  # Namespace where the app will be deployed
+  syncPolicy:
+    automated: {}  # Enable auto-sync (optional)
+    retry:
+      limit: 3  # Number of retry attempts
+      backoff:
+        duration: "5s"   # Wait time before first retry
+        factor: 2        # Doubles wait time
+        maxDuration: "30s"  # Max wait time between retries
