@@ -4,7 +4,7 @@ metadata:
   name: post-deploy-check
   annotations:
     argocd.argoproj.io/hook: PostSync
-    argocd.argoproj.io/hook-delete-policy: HookSuceeded
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
 
 spec:
   backoffLimit: 0
