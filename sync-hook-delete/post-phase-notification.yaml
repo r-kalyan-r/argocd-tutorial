@@ -12,6 +12,6 @@ spec:
       containers:
       - name: check
         image: nginx:latest
-        command: ["sh", "-c", "gashg 'App is healthy, Sent mail...' && exit 0"]
+        command: ["sh", "-c", "echo 'App is healthy, Sent mail...' && exit 0"]
         # command: ["some-nonexistent-command"]  # This command does not exist, causing failure
       restartPolicy: Never
