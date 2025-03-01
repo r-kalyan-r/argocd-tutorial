@@ -19,4 +19,4 @@ spec:
       backoff:
         duration: "5s"   # Wait time before first retry
         factor: 2        # Doubles wait time
-        maxDuration: "30s"  # Max wait time between retries
+        maxDuration: "15s"  # Max wait time between retries
