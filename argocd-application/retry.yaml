@@ -14,9 +14,9 @@ spec:
     namespace: application  # Namespace where the app will be deployed
   syncPolicy:
     automated: {}  # Enable auto-sync (optional)
-    # retry:
-    #   limit: 3  # Number of retry attempts
-    #   backoff:
-    #     duration: "5s"   # Wait time before first retry
-    #     factor: 2        # Doubles wait time
-    #     maxDuration: "30s"  # Max wait time between retries
+    retry:
+      limit: 3  # Number of retry attempts
+      backoff:
+        duration: "5s"   # Wait time before first retry
+        factor: 2        # Doubles wait time
+        maxDuration: "30s"  # Max wait time between retries
