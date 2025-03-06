@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: git@github.com:r-kalyan-r/argocd-tutorial.git
+    repoURL: https://github.com/r-kalyan-r/argocd-tutorial.git
     path: retry-sync-job  # Path inside repo
     targetRevision: HEAD
   destination:
