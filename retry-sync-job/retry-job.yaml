@@ -2,12 +2,14 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: failed-job
+  annotations:
+    argocd.argoproj.io/hook: Sync
 spec:
-  backoffLimit: 0  # Prevent Kubernetes from retrying on its own
+  backoffLimit: 0  # No retries by Kubernetes
   template:
     spec:
       containers:
       - name: check
         image: nginx:latest
-        command: ["some-nonexistent-command"]  # ❌ Fails instantly
+        command: ["some-nonexistent-command"]  # This command does not exist, causing failure
       restartPolicy: Never
