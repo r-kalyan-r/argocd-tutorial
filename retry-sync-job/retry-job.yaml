@@ -12,5 +12,5 @@ spec:
       containers:
       - name: check
         image: nginx:latest
-        command: ["some-nonexistent-command"]  # This command does not exist, causing failure
+        command: ["some-nonexistent-command-test"]  # This command does not exist, causing failure
       restartPolicy: Never
