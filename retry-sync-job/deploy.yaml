@@ -1,17 +1,17 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: retry-app
-# spec:
-#   replicas: 2
-#   selector:
-#     matchLabels:
-#       app: delete-app
-#   template:
-#     metadata:
-#       labels:
-#         app: delete-app
-#     spec:
-#       containers:
-#       - name: app
-#         image: nginx:xyz
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: retry-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: delete-app
+  template:
+    metadata:
+      labels:
+        app: delete-app
+    spec:
+      containers:
+      - name: app
+        image: nginx:xyz
