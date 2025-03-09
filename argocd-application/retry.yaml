@@ -15,6 +15,8 @@ spec:
   syncPolicy:
     automated: {}  # Enable auto-sync (optional)
     retry:
-      limit: 2  # Number of retry attempts
-    rollback:
-      enabled: true
+      limit: 3  # Number of retry attempts
+      backoff:
+        duration: "5s"   # Wait time before first retry
+        factor: 2        # Doubles wait time
+        maxDuration: "30s"  # Max wait time between retries

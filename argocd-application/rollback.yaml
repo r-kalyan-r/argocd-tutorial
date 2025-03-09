@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rollback-app
+  namespace: argocd  # Application namespace
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:r-kalyan-r/argocd-tutorial.git
+    path: rollback  # Path inside repo
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc  # Default cluster
+    namespace: application  # Namespace where the app will be deployed
+  syncPolicy:
+    automated: {}  # Enable auto-sync (optional)
+    rollback:
+      enabled: true
