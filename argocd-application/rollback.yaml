@@ -13,6 +13,8 @@ spec:
     server: https://kubernetes.default.svc  # Default cluster
     namespace: application  # Namespace where the app will be deployed
   syncPolicy:
-    automated: {}  # Enable auto-sync (optional)
-    rollback:
-      enabled: true
+    automated:
+      selfHeal: true
+      prune: true
+    retry:
+      limit: 3
