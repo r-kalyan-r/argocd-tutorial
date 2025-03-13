@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: rollback-app
+  name: rollback
   namespace: argocd  # Application namespace
 spec:
   project: default
