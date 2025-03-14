@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
       - name: app
-        image: nginx:perl
+        image: nginx:xyz
