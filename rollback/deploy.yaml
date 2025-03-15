@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: test
+  name: rollback
 spec:
   replicas: 2
   selector:
@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
       - name: app
-        image: nginx:xyz
+        image: nginx:latest
