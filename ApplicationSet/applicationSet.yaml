@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: multi-env-appset
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - cluster: https://kubernetes.default.svc
+            environment: dev
+          - cluster: https://kubernetes.default.svc
+            environment: prod
+  template:
+    metadata:
+      name: 'app-{{environment}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/r-kalyan-r/argocd-tutorial.git
+        path: app
+        targetRevision: HEAD
+      destination:
+        server: '{{cluster}}'
+        namespace: 'app-{{environment}}'
+      syncPolicy:
+        automated: {}

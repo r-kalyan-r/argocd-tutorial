@@ -17,8 +17,3 @@ spec:
     kind: Deployment
   - group: v1
     kind: Service
-  - group: apps
-    kind: ReplicaSet
-  - group: ""
-    kind: Pod
-

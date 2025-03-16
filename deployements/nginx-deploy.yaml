@@ -1,25 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
-  labels:
-    app: nginx
-  name: nginx
-  namespace: application
+  name: app
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: nginx
-  strategy: {}
+      app: app
   template:
     metadata:
-      creationTimestamp: null
       labels:
-        app: nginx
+        app: app
     spec:
       containers:
-      - image: nginx
-        name: nginx
-        resources: {}
-status: {}
+      - name: app
+        image: nginx:latest
