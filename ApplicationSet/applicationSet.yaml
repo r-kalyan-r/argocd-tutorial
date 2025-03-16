@@ -10,7 +10,7 @@ spec:
           - cluster: https://kubernetes.default.svc
             environment: dev
           - cluster: https://kubernetes.default.svc
-            environment: prod
+            environment: qa
   template:
     metadata:
       name: 'app-{{environment}}'
@@ -18,10 +18,10 @@ spec:
       project: default
       source:
         repoURL: https://github.com/r-kalyan-r/argocd-tutorial.git
-        path: app
+        path: deployments
         targetRevision: HEAD
       destination:
         server: '{{cluster}}'
-        namespace: 'app-{{environment}}'
+        namespace: '{{environment}}-knowhow'
       syncPolicy:
         automated: {}
