@@ -9,19 +9,23 @@ spec:
         elements:
           - cluster: https://kubernetes.default.svc
             environment: dev
-          - cluster: https://kubernetes.default.svc
+          - cluster: https://172.26.12.20:443 # QA cluster API URL 
             environment: qa
+          
   template:
     metadata:
-      name: 'app-{{environment}}'
+      name: 'app-{{environment}}'  # Result: app-dev, app-qa
     spec:
       project: default
       source:
         repoURL: https://github.com/r-kalyan-r/argocd-tutorial.git
         path: deployments
-        targetRevision: HEAD
+        targetRevision: HEAD 
+
       destination:
         server: '{{cluster}}'
-        namespace: '{{environment}}-knowhow'
+        namespace: '{{environment}}-app'
       syncPolicy:
-        automated: {}
+        automated:
+          prune: true
+          selfHeal: true
