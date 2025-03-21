@@ -9,11 +9,6 @@ spec:
     repoURL: https://r-kalyan-r.github.io/argocd-tutorial/  # PVT Helm repo
     chart: helm-nginx-demo  # The chart name
     targetRevision: 0.1.0  # Chart version
-    helm:
-      values: |
-        replicaCount: 3
-        image:
-          tag: "1.27.4"
   destination:
     server: https://kubernetes.default.svc
     namespace: application
