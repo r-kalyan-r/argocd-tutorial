@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: post-notification-job
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  template:
+    spec:
+      containers:
+      - name: check
+        image: nginx:latest
+        command: ["sh", "-c", "echo 'Email sent ' && exit 0"]
+      restartPolicy: Never

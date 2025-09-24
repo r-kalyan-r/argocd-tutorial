@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-helm-custom-values
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://r-kalyan-r.github.io/argocd-tutorial/  # PVT Helm repo
+    chart: helm-nginx-demo  # The chart name
+    targetRevision: 0.1.0  # Chart version
+    helm:
+      valueFiles:
+      - https://raw.githubusercontent.com/r-kalyan-r/argocd-tutorial/main/helm-nginx-demo/values-prod.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: application
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

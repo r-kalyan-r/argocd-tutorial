@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: failed-job
+spec:
+  backoffLimit: 0  # No retries by Kubernetes
+  template:
+    spec:
+      containers:
+      - name: check
+        image: nginx:latest
+        command: ["some-nonexistent-command"]  # This command does not exist, causing failure
+      restartPolicy: Never

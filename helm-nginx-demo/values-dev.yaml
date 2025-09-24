@@ -1,0 +1,3 @@
+replicaConunt: 2
+image:
+  tag: "perl"

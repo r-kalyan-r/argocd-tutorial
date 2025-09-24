@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: notification-test
+  namespace: argocd  # Application namespace
+  annotations:
+    notifications.argoproj.io/subscribe.on-deployed.slack: all-argocd-deployment-status
+    notifications.argoproj.io/subscribe.on-sync-failed.slack: all-argocd-deployment-status
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: all-argocd-deployment-status
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:r-kalyan-r/argocd-tutorial.git
+    path: deployments  # Path inside repo
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc  # Default cluster
+    namespace: application  # Namespace where the app will be deployed
