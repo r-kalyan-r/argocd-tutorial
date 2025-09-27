@@ -1,0 +1,8 @@
+helm:
+  parameters:
+  - name: image.name
+    value: docker.io/rapkalya/webapp
+    forcestring: true
+  - name: image.tag
+    value: v7
+    forcestring: true
