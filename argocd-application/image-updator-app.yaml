@@ -11,7 +11,7 @@ spec:
   project: default
   source:
     repoURL: git@github.com:r-kalyan-r/argocd-tutorial.git
-    path: image-updator   # 👈 your chart folder
+    path: image-updator-demo   # 👈 your chart folder
     targetRevision: main
     helm:
       valueFiles:
