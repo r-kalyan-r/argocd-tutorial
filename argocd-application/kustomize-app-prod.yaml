@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kustomize-app-prod
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'git@github.com:r-kalyan-r/argocd-tutorial.git'
+    targetRevision: HEAD
+    path: kustomize-app/overlays/prod
+  destination:
+    server: https://kubernetes.default.svcs
+    namespace: application
+  # syncPolicy:
+  #   automated:
+  #     prune: true
+  #     selfHeal: true
