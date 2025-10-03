@@ -3,11 +3,29 @@ items:
 - apiVersion: v1
   kind: Pod
   metadata:
+    annotations:
+      cni.projectcalico.org/containerID: 6daf988426eea956e6a884f4b75844c3dca91ef6f6ee8b29039c848c3b71157d
+      cni.projectcalico.org/podIP: 10.244.0.108/32
+      cni.projectcalico.org/podIPs: 10.244.0.108/32
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"labels":{"app":"nginx","app.kubernetes.io/instance":"myapp","pod-template-hash":"676b6c5bbc"},"name":"nginx-676b6c5bbc-z7789","namespace":"application"},"spec":{"containers":[{"image":"nginx","imagePullPolicy":"Always","name":"nginx","resources":{},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","volumeMounts":[{"mountPath":"/var/run/secrets/kubernetes.io/serviceaccount","name":"kube-api-access-h7t62","readOnly":true}]}],"dnsPolicy":"ClusterFirst","enableServiceLinks":true,"preemptionPolicy":"PreemptLowerPriority","priority":0,"restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"serviceAccount":"default","serviceAccountName":"default","terminationGracePeriodSeconds":30,"tolerations":[{"effect":"NoExecute","key":"node.kubernetes.io/not-ready","operator":"Exists","tolerationSeconds":300},{"effect":"NoExecute","key":"node.kubernetes.io/unreachable","operator":"Exists","tolerationSeconds":300}],"volumes":[{"name":"kube-api-access-h7t62","projected":{"defaultMode":420,"sources":[{"serviceAccountToken":{"expirationSeconds":3607,"path":"token"}},{"configMap":{"items":[{"key":"ca.crt","path":"ca.crt"}],"name":"kube-root-ca.crt"}},{"downwardAPI":{"items":[{"fieldRef":{"apiVersion":"v1","fieldPath":"metadata.namespace"},"path":"namespace"}]}}]}}]}}
+    creationTimestamp: "2025-09-27T09:41:14Z"
+    generateName: nginx-676b6c5bbc-
     labels:
       app: nginx
+      app.kubernetes.io/instance: myapp
       pod-template-hash: 676b6c5bbc
     name: nginx-676b6c5bbc-z7789
     namespace: application
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: nginx-676b6c5bbc
+      uid: 039a1ad8-47b7-4a2d-bf18-c819aebf68fa
+    resourceVersion: "76720240"
+    uid: f489a66e-00e8-4355-a853-588595ac70f0
   spec:
     containers:
     - image: nginx
@@ -22,6 +40,7 @@ items:
         readOnly: true
     dnsPolicy: ClusterFirst
     enableServiceLinks: true
+    nodeName: aks-workloads-28675162-vmss00006z
     preemptionPolicy: PreemptLowerPriority
     priority: 0
     restartPolicy: Always
@@ -58,15 +77,72 @@ items:
                 apiVersion: v1
                 fieldPath: metadata.namespace
               path: namespace
-  
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-27T09:41:32Z"
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-27T09:41:14Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-27T09:41:32Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-27T09:41:32Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2025-09-27T09:41:14Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://a22412ab6cdd66b3eb0dea1931c1437ffdf5e995bb96f267fe4b3ede03885ab9
+      image: docker.io/library/nginx:latest
+      imageID: docker.io/library/nginx@sha256:d5f28ef21aabddd098f3dbc21fe5b7a7d7a184720bc07da0b6c9b9820e97f25e
+      lastState: {}
+      name: nginx
+      ready: true
+      restartCount: 0
+      started: true
+      state:
+        running:
+          startedAt: "2025-09-27T09:41:31Z"
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-h7t62
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 172.26.12.85
+    hostIPs:
+    - ip: 172.26.12.85
+    phase: Running
+    podIP: 10.244.0.108
+    podIPs:
+    - ip: 10.244.0.108
+    qosClass: BestEffort
+    startTime: "2025-09-27T09:41:14Z"
 - apiVersion: v1
   kind: Service
   metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"nginx","app.kubernetes.io/instance":"myapp"},"name":"nginx-service","namespace":"application"},"spec":{"internalTrafficPolicy":"Cluster","ipFamilies":["IPv4"],"ipFamilyPolicy":"SingleStack","ports":[{"port":80,"protocol":"TCP","targetPort":80}],"selector":{"app":"nginx"},"sessionAffinity":"None","type":"ClusterIP"}}
+    creationTimestamp: "2025-09-27T09:41:37Z"
     labels:
       app: nginx
+      app.kubernetes.io/instance: myapp
     name: nginx-service
     namespace: application
+    resourceVersion: "76720235"
+    uid: 3aee6574-c9f2-46f8-b12f-3f32664c5562
   spec:
+    clusterIP: 10.0.212.4
+    clusterIPs:
+    - 10.0.212.4
     internalTrafficPolicy: Cluster
     ipFamilies:
     - IPv4
@@ -79,13 +155,24 @@ items:
       app: nginx
     sessionAffinity: None
     type: ClusterIP
+  status:
+    loadBalancer: {}
 - apiVersion: apps/v1
   kind: Deployment
   metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"nginx","app.kubernetes.io/instance":"myapp"},"name":"nginx","namespace":"application"},"spec":{"progressDeadlineSeconds":600,"replicas":1,"revisionHistoryLimit":10,"selector":{"matchLabels":{"app":"nginx"}},"strategy":{"rollingUpdate":{"maxSurge":"25%","maxUnavailable":"25%"},"type":"RollingUpdate"},"template":{"metadata":{"labels":{"app":"nginx"}},"spec":{"containers":[{"image":"nginx","imagePullPolicy":"Always","name":"nginx","resources":{},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File"}],"dnsPolicy":"ClusterFirst","restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30}}}}
+    creationTimestamp: "2025-09-27T09:41:14Z"
+    generation: 2
     labels:
       app: nginx
+      app.kubernetes.io/instance: myapp
     name: nginx
     namespace: application
+    resourceVersion: "76720247"
+    uid: eb0b96c1-2797-4b2b-94b8-09e7dd16ca1a
   spec:
     progressDeadlineSeconds: 600
     replicas: 1
@@ -100,6 +187,7 @@ items:
       type: RollingUpdate
     template:
       metadata:
+        creationTimestamp: null
         labels:
           app: nginx
       spec:
@@ -115,12 +203,39 @@ items:
         schedulerName: default-scheduler
         securityContext: {}
         terminationGracePeriodSeconds: 30
-  
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2025-09-27T09:41:32Z"
+      lastUpdateTime: "2025-09-27T09:41:32Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2025-09-27T09:41:14Z"
+      lastUpdateTime: "2025-09-27T09:41:32Z"
+      message: ReplicaSet "nginx-676b6c5bbc" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 2
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
 - apiVersion: apps/v1
   kind: ReplicaSet
   metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"ReplicaSet","metadata":{"annotations":{},"labels":{"app":"nginx","app.kubernetes.io/instance":"myapp","pod-template-hash":"676b6c5bbc"},"name":"nginx-676b6c5bbc","namespace":"application","ownerReferences":[{"apiVersion":"apps/v1","blockOwnerDeletion":true,"controller":true,"kind":"Deployment","name":"nginx","uid":"eb0b96c1-2797-4b2b-94b8-09e7dd16ca1a"}]},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"nginx","pod-template-hash":"676b6c5bbc"}},"template":{"metadata":{"labels":{"app":"nginx","pod-template-hash":"676b6c5bbc"}},"spec":{"containers":[{"image":"nginx","imagePullPolicy":"Always","name":"nginx","resources":{},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File"}],"dnsPolicy":"ClusterFirst","restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30}}}}
+    creationTimestamp: "2025-09-27T09:41:14Z"
+    generation: 1
     labels:
       app: nginx
+      app.kubernetes.io/instance: myapp
       pod-template-hash: 676b6c5bbc
     name: nginx-676b6c5bbc
     namespace: application
@@ -131,6 +246,8 @@ items:
       kind: Deployment
       name: nginx
       uid: eb0b96c1-2797-4b2b-94b8-09e7dd16ca1a
+    resourceVersion: "76720241"
+    uid: 039a1ad8-47b7-4a2d-bf18-c819aebf68fa
   spec:
     replicas: 1
     selector:
@@ -139,6 +256,7 @@ items:
         pod-template-hash: 676b6c5bbc
     template:
       metadata:
+        creationTimestamp: null
         labels:
           app: nginx
           pod-template-hash: 676b6c5bbc
@@ -155,6 +273,12 @@ items:
         schedulerName: default-scheduler
         securityContext: {}
         terminationGracePeriodSeconds: 30
- 
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
 kind: List
-
+metadata:
+  resourceVersion: ""
