@@ -10,7 +10,7 @@ spec:
     targetRevision: HEAD
     path: kustomize-app/overlays/prod
   destination:
-    server: https://kubernetes.default.svcs
+    server: https://kubernetes.default.svc
     namespace: application
   # syncPolicy:
   #   automated:

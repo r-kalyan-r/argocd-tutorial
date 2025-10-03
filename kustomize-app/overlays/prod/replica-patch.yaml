@@ -1,6 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kustomize-app
+  name: kustomize-app-prod
 spec:
   replicas: 5
