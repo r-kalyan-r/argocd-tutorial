@@ -1,20 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: terraform-app
+  name: plugin-demo
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: 'git@github.com:r-kalyan-r/argocd-tutorial.git'
-    targetRevision: HEAD
-    path: terraform-app/apps
+    path: plugins/simple-demo
+    targetRevision: main
     plugin:
-      name: terraform-v1.0
+      name: simple-generator
   destination:
     server: https://kubernetes.default.svc
-    namespace: demo-ns
+    namespace: application
   syncPolicy:
     automated:
-      prune: true
       selfHeal: true
+      prune: true
