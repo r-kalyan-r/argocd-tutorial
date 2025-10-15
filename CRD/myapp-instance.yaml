@@ -1,0 +1,9 @@
+apiVersion: apps.example.com/v1
+kind: MyApp
+metadata:
+  name: demo-myapp
+  namespace: default
+spec:
+  version: "v1"
+status:
+  state: "Ready"
